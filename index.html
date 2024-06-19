@@ -1,11 +1,314 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ay team</title>
+    <title>Untitled Document</title>
+    <meta name="Author" content=""/>
+    <link rel="icon" href="" type="image/x-icon" class="site_icon" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: black;
+            color: white;
+            font-family: monospace;
+            user-select: none;
+            -ms-overflow-style: none; /* for Internet Explorer, Edge */
+            scrollbar-width: none; /* for Firefox */
+        }
+        body::-webkit-scrollbar {
+          display: none; /* for Chrome, Safari, and Opera */
+        }
+        * { margin: 0; padding: 0; }
+        .bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: -1;
+        }
+        .bg video {
+            width: 90%;
+            object-fit: cover;
+        }
+        .box-start {
+            width: 100%;
+            height: 100vh;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background: rgba(0,0,0,.8);
+            opacity: 0;
+            visibility: hidden;
+            display: none;
+        }
+        .box-start * {
+            text-align: center;
+        }
+        .icon img {
+            width: 200px;
+        }
+        .header {
+            font-size: 30px;
+            color: red;
+            font-weight: bold;
+            text-shadow: 1px 0 4px rgba(0,0,0,.5);
+        }
+        .desc {
+            padding: 10px;
+            width: 400px;
+        }
+        .box-end {
+            width: 100%;
+            height: 100vh;
+            background: rgba(0,0,0,.8);
+            padding-top: 20px;
+            opacity: 0;
+            visibility: hidden;
+            display: none;
+        }
+        .mod-box {
+            width: 90%;
+            margin: 0 auto;
+            background: rgba(255,255,255,.2);
+            backdrop-filter: blur(40px);
+            padding: 10px;
+            border-radius: 10px;
+            min-height: 60vh;
+        }
+        .box-start.active, .box-end.active {
+            opacity: 1;
+            visibility: visible;
+            display: block;
+            transition: 1s;
+        }
+        .ret {
+            background: black;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100vh;
+            transition: .2s;
+        }
+        .ret.active {
+            display: none;
+        }
+        .ret button {
+            font-size: 20px;
+            padding: 10px;
+            background: rgba(255,255,255,.1)
+            backdrop-filter: blur(10px);
+            border: none;
+            border-radius: 3px;
+        }
+        .ms-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            z-index: 1;
+            background: black;
+            width: 100%;
+            height: 100vh;
+            top: 0;
+            left: 0;
+        }
+        .ms-box.active {
+            display: none;
+        }
+        .mess {
+            background: white;
+            padding: 10px;
+            color: black;
+            width: 400px;
+            height: 300px;
+            position: relative;
+        }
+        .mess-header {
+            background: whitesmoke;
+            border-bottom: 1px solid 111;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+        }
+        .mess-header img {
+            width: 30px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+        .mess-name {
+            color: dodgerblue;
+            font-weight: bold;
+            font-size: 16px;
+            padding: 0 10px;
+        }
+        .mess-box-s {
+            background: #ccc;
+            padding: 3px 7px;
+            margin: 1px 0;
+            font-size: 16px;
+            border-radius: 5px;
+            display: none;
+            transition: 1s;
+            font-size: 0;
+        }
+        .mess-box-s.active {
+            display: block;
+            font-size: 15px;
+        }
+        .mess-inp {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background: #ddd;
+            width: calc(100% - 10px);
+            padding: 6px 5px;
+            display: flex;
+        }
+        .mess-inp input {
+            font-size: 16px;
+            width: 90%;
+        }
+        .mess-inp button {
+            border: 1px solid #444;
+            padding: 1px;
+            width: 10%;
+        }
+        .wr {
+            position: absolute;
+            bottom: 40px;
+            width: calc(100% - 20px);
+            background: white;
+            left: 0;
+            padding: 0 10px;
+        }
+        @media (max-width: 760px) {
+            video {
+                width: 100%;
+                height: 100vh;
+            }
+        }
+    </style>
 </head>
 <body>
-    saaa
+
+    <div class="ret">
+        <div class="click-box">
+            <button id="next-1">Siteye devam et</button>
+        </div>
+    </div>
+    <div class="ms-box">
+        <div class="dev-wiew">
+            <div class="mess">
+                <div class="mess-header">
+                    <img src="https://www.pngitem.com/pimgs/m/524-5246388_anonymous-user-hd-png-download.png">
+                    <div class="mess-name">DARK DAYS AY TEAM</div>
+                </div>
+                <div class="mess-box-s" id="m1">Hello Admin</div>
+                <div class="mess-box-s" id="m2">Hello Guest</div>
+                <div class="mess-box-s" id="m3">I am hacker</div>
+                <div class="mess-box-s" id="m4">I am AY TEAM</div>
+                <div class="mess-box-s" id="m5">I am Dark-Days</div>
+                <div class="mess-box-s" id="m6">This is site hacked</div>
+                <div class="wr">Admin's Writing...</div>
+                <div class="mess-inp">
+                    <input type="text" disabled="true" placeholder="Write a message...">
+                    <button disabled="">send</button>
+                </div>
+            </div>
+        </div>
+      
+    </div>
+    <div class="bg">
+        <video loop id="video">
+            <source src="https://c.tenor.com/f3HGfIRTPGYAAAPo/atat%C3%BCrk-mustafa-kemal-atat%C3%BCrk.mp4" type="">
+        </video>
+    </div>
+
+    <div class="box-start">
+        <div class="icon"><img src="resimler/LOGO.1.png"></div>
+        <div class="header">The site has been hacked by Dark-Days</div>
+        <div class="desc">EĞER HAYAT BUYSA BEN KODLARDA SAKLIYIM..🥀 (DARK-DAYS) (ZED)</div>
+        <div class="header">!! AY TEAM !!</div>
+    </div>
+    <div class="box-end">
+        <div class="mod-box">
+            <h1>Size bir mesajımız var!</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+    </div>
+
+    <audio  loop autoplay="" class="music" style="display: none;">
+      <source src="https://cdn.indirdur.ist/dld/RUIrb0dtdTdmV1d4VFgvK25DVklHZz/shahmen-mark_(indirdur.ist).mp3" type="audio/mpeg">
+      Tarayıcınız bu özelliği desteklemiyor.
+    </audio>
+<script>
+    var music = document.querySelector(".music");
+    var next1s = document.getElementById("next-1");
+    var video = document.getElementById("video");
+    var ret = document.querySelector(".ret");
+    var msbox = document.querySelector(".ms-box")
+    var messbox1 =  document.getElementById("m1");
+    var messbox2 =  document.getElementById("m2");
+    var messbox3 =  document.getElementById("m3");
+    var messbox4 =  document.getElementById("m4");
+    var messbox5 =  document.getElementById("m5");
+    var messbox6 =  document.getElementById("m6");
+
+
+    var boxstart = document.querySelector(".box-start");
+    var boxend = document.querySelector(".box-end");
+
+    function nexted() {
+        ret.classList.add("active");
+        music.play();
+        function ms1() { messbox1.classList.add("active") }
+        function ms2() { messbox2.classList.add("active") }
+        function ms3() { messbox3.classList.add("active") }
+        function ms4() { messbox4.classList.add("active") }
+        function ms5() { messbox5.classList.add("active") }
+        function ms6() { messbox6.classList.add("active") }
+        setTimeout(ms1,1000);
+        setTimeout(ms2,5000);
+        setTimeout(ms3,7000);
+        setTimeout(ms4,13000);
+        setTimeout(ms5,16000);
+        setTimeout(ms6,19000);
+        function vdst() {
+            msbox.classList.add("active");
+            video.play();
+        }
+        setTimeout(vdst, 23000);
+        function ados() {
+            boxstart.classList.add("active");
+            boxend.classList.add("active");
+            boxstart.style.display = "flex";
+        }
+        setTimeout(ados, 31000);
+    }
+
+
+    window.addEventListener("keypress", nexted);
+    next1s.addEventListener("click", nexted);
+  
+
+
+</script>
 </body>
 </html>
