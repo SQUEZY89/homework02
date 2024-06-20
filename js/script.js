@@ -46,11 +46,11 @@ for (var i = 0; i < word.length; i++) {
 }
 
 setTimeout(write, 50);
-incrementer = setTimeout(inc, 800);
+incrementer = setTimeout(inc, 50);
 
 function write() {
   for (var i = letter_count; i < word.length; i++) {
-    var c = Math.floor(Math.random() * 36);
+    var c = Math.floor(Math.random() * 10);
     $("hacker")[i].innerHTML = alphabet[c];
   }
   if (!finished) {
@@ -64,16 +64,16 @@ function inc() {
   letter_count++;
   if (letter_count >= word.length) {
     finished = true;
-    setTimeout(reset, 5000);
+    setTimeout(reset, 2000);
   } else {
-    setTimeout(inc, 400);
+    setTimeout(inc, 100);
   }
 }
 
 function reset() {
   letter_count = 0;
   finished = false;
-  setTimeout(inc, 800);
+  setTimeout(inc, 100);
   setTimeout(write, 50);
   $("hacker").removeClass("glow");
 }
